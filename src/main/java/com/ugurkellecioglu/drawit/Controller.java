@@ -21,27 +21,43 @@ import javax.swing.JPanel;
  */
 public class Controller implements ActionListener{
     
-    private JButton square;
-    private JButton circle;
+    private JButton buttonSquare;
+    private JButton buttonCircle;
+    private JButton buttonLine;
+    private JButton buttonUndo;
     protected ArrayList<Point> points;
+    protected ArrayList<Shape> shapes;
 
     private Shape shape;
     public Controller(){
         points = new ArrayList<Point>();
-
-        square = new JButton();
-        square.addActionListener(((ActionEvent e) -> {
+        shapes = new ArrayList<Shape>();
+        buttonSquare = new JButton();
+        buttonSquare.addActionListener(((ActionEvent e) -> {
             shape = new Square();
         }));
-        square.setText("SQUARE");
-        square.setBounds(0, 0, 100, 100);
+        buttonSquare.setText("SQUARE");
+        buttonSquare.setBounds(0, 0, 100, 100);
         
-        circle = new JButton();
-        circle.addActionListener(((ActionEvent e) -> {
+        buttonCircle = new JButton();
+        buttonCircle.addActionListener(((ActionEvent e) -> {
             shape = new Circle();
         }));
-        circle.setText("CIRCLE");
-        circle.setBounds(0, 0, 200, 200);
+        buttonCircle.setText("CIRCLE");
+        buttonCircle.setBounds(0, 0, 200, 200);
+        
+        
+        buttonLine = new JButton();
+        buttonLine.addActionListener(((ActionEvent e) -> {
+            shape = new Line();
+        }));
+        buttonLine.setText("LINE");
+        buttonLine.setBounds(0, 0, 300, 200);
+        
+        buttonUndo = new JButton();
+        
+        buttonUndo.setText("UNDO");
+        buttonUndo.setBounds(0, 0, 300, 200);
     }
 
     @Override
@@ -49,30 +65,63 @@ public class Controller implements ActionListener{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public JButton getSquare() {
-        return square;
+    public JButton getButtonSquare() {
+        return buttonSquare;
     }
 
-    public void setSquare(JButton square) {
-        this.square = square;
+    public void setButtonSquare(JButton buttonSquare) {
+        this.buttonSquare = buttonSquare;
     }
 
+    public JButton getButtonCircle() {
+        return buttonCircle;
+    }
+
+    public void setButtonCircle(JButton buttonCircle) {
+        this.buttonCircle = buttonCircle;
+    }
+
+    public JButton getButtonLine() {
+        return buttonLine;
+    }
+
+    public void setButtonLine(JButton buttonLine) {
+        this.buttonLine = buttonLine;
+    }
 
     public ArrayList<Point> getPoints() {
         return points;
     }
 
-    public void setPoints(ArrayList<Point> Points) {
-        this.points = Points;
+    public void setPoints(ArrayList<Point> points) {
+        this.points = points;
     }
 
-    public JButton getCircle() {
-        return circle;
+    public Shape getShape() {
+        return shape;
     }
 
-    public void setCircle(JButton circle) {
-        this.circle = circle;
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
+
+    public JButton getButtonUndo() {
+        return buttonUndo;
+    }
+
+    public void setButtonUndo(JButton buttonUndo) {
+        this.buttonUndo = buttonUndo;
+    }
+
+    public ArrayList<Shape> getShapes() {
+        return shapes;
+    }
+
+    public void setShapes(ArrayList<Shape> shapes) {
+        this.shapes = shapes;
+    }
+
+   
 
 
 
@@ -95,6 +144,8 @@ public class Controller implements ActionListener{
                     if(getPoints().size() >= 2){
                         shape.setPoint_one(points.get(0));
                         shape.setPoint_two(points.get(1));
+                        shapes.add(shape);
+
                         shape.paint(myPanel.getGraphics());
                         //myPanel.paintSquare(myPanel.getGraphics());
                         points = new ArrayList<Point>();
@@ -103,6 +154,25 @@ public class Controller implements ActionListener{
                 
             }
             
+     
+            
+        });
+    }
+
+    void addListenerUndo(JPanel myPanel){
+        buttonUndo.addMouseListener(new MouseAdapter(){
+                @Override
+            public void mousePressed(MouseEvent e){
+                
+                System.out.println(shapes.size());
+                shapes.remove(shapes.size()-1);
+                myPanel.repaint();
+                for(Shape s: shapes){
+                    s.paint(myPanel.getGraphics());
+                    System.out.println(s.toString());
+                }
+                
+            }
         });
     }
 

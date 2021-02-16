@@ -45,6 +45,11 @@ public class Shape implements IShape{
     public void setPoint_two(Point point_two) {
         this.point_two = point_two;
     }
+
+    @Override
+    public String toString() {
+        return "Shape{" + "point_one=" + point_one + ", point_two=" + point_two + '}';
+    }
     
     
 }

@@ -40,11 +40,13 @@ public class MyFrame extends JFrame implements MouseListener{
         
         
         controller.addListenerToMouse(myPanel);
+        controller.addListenerUndo(myPanel);
         
         
-        
-        myPanel.add(controller.getSquare());
-        myPanel.add(controller.getCircle());
+        myPanel.add(controller.getButtonSquare());
+        myPanel.add(controller.getButtonCircle());
+        myPanel.add(controller.getButtonLine());
+        myPanel.add(controller.getButtonUndo());
     }
 
     @Override
