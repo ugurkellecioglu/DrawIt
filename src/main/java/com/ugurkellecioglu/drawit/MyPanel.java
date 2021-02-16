@@ -19,7 +19,7 @@ public class MyPanel extends JPanel{
     public MyPanel(){
         super();
         setBounds(0, 0, 1000, 1000);
-        setBackground(Color.red);
+        setBackground(Color.WHITE);
 
     }
     public void paintComponent(Graphics g, int x, int y) {
@@ -32,11 +32,18 @@ public class MyPanel extends JPanel{
         //g.fillRect(x,y, w, h);
         double w = Math.abs(p2.getX() - p1.getX());
         double h = Math.abs(p2.getY() - p1.getY());
-        if(p2.getX() > p1.getX()){
-            g.fillRect((int) p1.getX(), (int) p2.getX(), (int) w, (int) h);
+        if(p2.getX() > p1.getX() && p2.getY() > p1.getY()){
+            g.fillRect((int) p1.getX(), (int) p1.getY(), (int) w, (int) h);
         }
-        else if(p1.getX() > p2.getX() && p1.getY() > ){
+        else if(p1.getX()< p2.getX() && p1.getY()> p2.getY()){
+            g.fillRect((int) p1.getX(), (int) p2.getY(), (int) w, (int) h);
+        }
+        else if(p1.getX() > p2.getX() && p1.getY() < p2.getY()){
             g.fillRect((int) p2.getX(), (int) p1.getY(), (int) w, (int) h);
         }
+        else{
+            g.fillRect((int) p2.getX(), (int) p2.getY(), (int) w, (int) h);
+        }
+
     }
 }

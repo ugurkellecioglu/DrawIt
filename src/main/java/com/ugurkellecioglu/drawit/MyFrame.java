@@ -23,15 +23,18 @@ public class MyFrame extends JFrame implements MouseListener{
 
     private final MyPanel myPanel;
     private final Controller controller;
-    
+    private final int WIDTH = 1000;
+    private final int HEIGHT = 1000;
+    private final String TITLE = "Draw It";
     private boolean square = false;
     public MyFrame() {
         
         controller = new Controller();
-        setTitle("Draw It");
-        setBounds(0, 0, 1000, 1000);
+        setTitle(TITLE);
+        setBounds(0, 0, WIDTH, HEIGHT);
         setVisible(true);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         myPanel = new MyPanel();
         this.getContentPane().add(myPanel);
         myPanel.addMouseListener(new MouseAdapter() {

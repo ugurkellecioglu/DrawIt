@@ -18,8 +18,10 @@ import javax.swing.JButton;
  */
 public class Controller implements ActionListener{
     
-    protected JButton square;
-    protected boolean squareBoolean = false;
+    private JButton square;
+    private boolean squareBoolean = false;
+    
+    
     private ArrayList<Point> squarePoints;
 
     public Controller(){
