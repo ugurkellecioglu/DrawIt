@@ -26,7 +26,7 @@ public class MyFrame extends JFrame implements MouseListener{
     private final int WIDTH = 1000;
     private final int HEIGHT = 1000;
     private final String TITLE = "Draw It";
-    private boolean square = false;
+    
     public MyFrame() {
         
         controller = new Controller();
@@ -37,38 +37,15 @@ public class MyFrame extends JFrame implements MouseListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         myPanel = new MyPanel();
         this.getContentPane().add(myPanel);
-        myPanel.addMouseListener(new MouseAdapter() {
-            boolean check = true;
-
-            @Override
-            public void mousePressed(MouseEvent e){
-                Point p  = new Point(e.getX(), e.getY());
-                if(controller.squareBoolean){
-                    controller.getSquarePoints().add(p);
-                    
-                
-                }
-            }
-           
-            @Override
-            public void mouseReleased(MouseEvent e){
-                Point p  = new Point(e.getX(), e.getY());
-                System.out.println(p);
-                if(controller.squareBoolean){
-                    controller.getSquarePoints().add(p);
-                    if(controller.getSquarePoints().size() == 2){
-                        myPanel.paintSquare(myPanel.getGraphics(), controller.getSquarePoints().get(0), controller.getSquarePoints().get(1));
-                        System.out.println(controller.getSquarePoints().get(0) + " " + controller.getSquarePoints().get(1));
-                        controller.getSquarePoints().remove(0);
-                        controller.getSquarePoints().remove(0);
-                    }
-                }
-                
-            }
-            
-        });
+        
+        
+        controller.addListenerToSquare(myPanel);
+        controller.addListenerToCircle(myPanel);
+        
+        
         
         myPanel.add(controller.getSquare());
+        myPanel.add(controller.getCircle());
     }
 
     @Override
