@@ -22,11 +22,4 @@ public class MyPanel extends JPanel{
         setBackground(Color.WHITE);
 
     }
-    public void paintComponent(Graphics g, int x, int y) {
-        g.setColor(Color.BLUE);
-        g.fillOval(x,y,10,10);
-    }
-    public void paintSquare(Graphics g, Point p1, Point p2) {
-        
-    }
 }

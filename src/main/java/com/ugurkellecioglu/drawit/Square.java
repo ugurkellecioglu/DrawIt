@@ -16,7 +16,9 @@ import java.awt.Point;
 public class Square extends Shape{
 
     private double HEIGHT, WIDTH;
-
+    public Square() {
+        
+    }
     public Square(Point point_one, Point point_two) {
         super(point_one, point_two);
     }

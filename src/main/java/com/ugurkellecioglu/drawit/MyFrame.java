@@ -39,8 +39,7 @@ public class MyFrame extends JFrame implements MouseListener{
         this.getContentPane().add(myPanel);
         
         
-        controller.addListenerToSquare(myPanel);
-        controller.addListenerToCircle(myPanel);
+        controller.addListenerToMouse(myPanel);
         
         
         

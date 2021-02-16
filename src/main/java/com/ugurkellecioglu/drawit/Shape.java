@@ -21,11 +21,30 @@ public class Shape implements IShape{
         this.point_one = point_one;
         this.point_two = point_two;
     }
-    
+    public Shape() {
+
+    }
     
     @Override
     public void paint(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Point getPoint_one() {
+        return point_one;
+    }
+
+    public void setPoint_one(Point point_one) {
+        this.point_one = point_one;
+    }
+
+    public Point getPoint_two() {
+        return point_two;
+    }
+
+    public void setPoint_two(Point point_two) {
+        this.point_two = point_two;
+    }
+    
     
 }

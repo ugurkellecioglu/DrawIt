@@ -22,27 +22,23 @@ import javax.swing.JPanel;
 public class Controller implements ActionListener{
     
     private JButton square;
-    protected boolean squareBoolean = false;
     private JButton circle;
-    protected boolean circleBoolean = false;
-
     protected ArrayList<Point> points;
 
+    private Shape shape;
     public Controller(){
         points = new ArrayList<Point>();
 
         square = new JButton();
         square.addActionListener(((ActionEvent e) -> {
-            squareBoolean = true;
-
+            shape = new Square();
         }));
         square.setText("SQUARE");
         square.setBounds(0, 0, 100, 100);
         
         circle = new JButton();
         circle.addActionListener(((ActionEvent e) -> {
-            circleBoolean = true;
-
+            shape = new Circle();
         }));
         circle.setText("CIRCLE");
         circle.setBounds(0, 0, 200, 200);
@@ -61,13 +57,6 @@ public class Controller implements ActionListener{
         this.square = square;
     }
 
-    public boolean isSquareBoolean() {
-        return squareBoolean;
-    }
-
-    public void setSquareBoolean(boolean squareBoolean) {
-        this.squareBoolean = squareBoolean;
-    }
 
     public ArrayList<Point> getPoints() {
         return points;
@@ -85,79 +74,39 @@ public class Controller implements ActionListener{
         this.circle = circle;
     }
 
-    public boolean isCircleBoolean() {
-        return circleBoolean;
-    }
 
-    public void setCircleBoolean(boolean circleBoolean) {
-        this.circleBoolean = circleBoolean;
-    }
 
-    void addListenerToSquare(JPanel myPanel) {
+    void addListenerToMouse(JPanel myPanel) {
         
-        circleBoolean = false;
         myPanel.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(MouseEvent e){
                 Point p  = new Point(e.getX(), e.getY());
-                if(squareBoolean){
-                    getPoints().add(p);
+                points.add(p);
                     
                 
-                }
             }
            
             @Override
             public void mouseReleased(MouseEvent e){
                 Point p  = new Point(e.getX(), e.getY());
-                if(squareBoolean){
                     points.add(p);
                     if(getPoints().size() >= 2){
-                        Shape square = new Square(getPoints().get(0), getPoints().get(1));
-                        square.paint(myPanel.getGraphics());
+                        shape.setPoint_one(points.get(0));
+                        shape.setPoint_two(points.get(1));
+                        shape.paint(myPanel.getGraphics());
                         //myPanel.paintSquare(myPanel.getGraphics());
                         points = new ArrayList<Point>();
 
                     }
-                }
                 
             }
             
         });
     }
 
-    void addListenerToCircle(JPanel myPanel) {
-        circleBoolean = false;
-        myPanel.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                Point p = new Point(e.getX(), e.getY());
-                if (circleBoolean) {
-                    getPoints().add(p);
-
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                Point p = new Point(e.getX(), e.getY());
-                System.out.println(p);
-                if (circleBoolean) {
-                    points.add(p);
-                    if (getPoints().size() >= 2) {
-                        Shape circle = new Circle(getPoints().get(0), getPoints().get(1));
-                        circle.paint(myPanel.getGraphics());
-                        //myPanel.paintSquare(myPanel.getGraphics());
-                        points = new ArrayList<Point>();
-                    }
-                }
-
-            }
-
-        });
-    }
+    
 
     
 }
