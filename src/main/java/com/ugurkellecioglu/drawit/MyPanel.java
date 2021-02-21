@@ -6,8 +6,6 @@
 package com.ugurkellecioglu.drawit;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
 import javax.swing.JPanel;
 
 /**
@@ -16,10 +14,10 @@ import javax.swing.JPanel;
  */
 public class MyPanel extends JPanel{
     
-    public MyPanel(){
+    public MyPanel(int height, int width, Color c){
         super();
-        setBounds(0, 0, 1000, 1000);
-        setBackground(Color.WHITE);
+        setBounds(0, 0, width, height);
+        setBackground(c);
 
     }
 }

@@ -5,14 +5,17 @@
  */
 package com.ugurkellecioglu.drawit;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -25,9 +28,9 @@ public class Controller implements ActionListener{
     private JButton buttonCircle;
     private JButton buttonLine;
     private JButton buttonUndo;
+    private JButton buttonColors;
     protected ArrayList<Point> points;
     protected ArrayList<Shape> shapes;
-
     private Shape shape;
     public Controller(){
         points = new ArrayList<Point>();
@@ -37,14 +40,14 @@ public class Controller implements ActionListener{
             shape = new Square();
         }));
         buttonSquare.setText("SQUARE");
-        buttonSquare.setBounds(0, 0, 100, 100);
+        buttonSquare.setBounds(100, 50, 100, 50);
         
         buttonCircle = new JButton();
         buttonCircle.addActionListener(((ActionEvent e) -> {
             shape = new Circle();
         }));
         buttonCircle.setText("CIRCLE");
-        buttonCircle.setBounds(0, 0, 200, 200);
+        buttonCircle.setBounds(200, 50, 100, 50);
         
         
         buttonLine = new JButton();
@@ -52,12 +55,17 @@ public class Controller implements ActionListener{
             shape = new Line();
         }));
         buttonLine.setText("LINE");
-        buttonLine.setBounds(0, 0, 300, 200);
+        buttonLine.setBounds(300, 50, 100, 50);
         
         buttonUndo = new JButton();
-        
         buttonUndo.setText("UNDO");
-        buttonUndo.setBounds(0, 0, 300, 200);
+        buttonUndo.setBounds(400, 50, 100, 50);
+        
+        buttonColors = new JButton();
+        buttonColors.setText("COLORS");
+        buttonColors.setBounds(500, 50, 100, 50);
+
+        
     }
 
     @Override
@@ -69,25 +77,15 @@ public class Controller implements ActionListener{
         return buttonSquare;
     }
 
-    public void setButtonSquare(JButton buttonSquare) {
-        this.buttonSquare = buttonSquare;
-    }
-
     public JButton getButtonCircle() {
         return buttonCircle;
     }
 
-    public void setButtonCircle(JButton buttonCircle) {
-        this.buttonCircle = buttonCircle;
-    }
 
     public JButton getButtonLine() {
         return buttonLine;
     }
 
-    public void setButtonLine(JButton buttonLine) {
-        this.buttonLine = buttonLine;
-    }
 
     public ArrayList<Point> getPoints() {
         return points;
@@ -109,9 +107,6 @@ public class Controller implements ActionListener{
         return buttonUndo;
     }
 
-    public void setButtonUndo(JButton buttonUndo) {
-        this.buttonUndo = buttonUndo;
-    }
 
     public ArrayList<Shape> getShapes() {
         return shapes;
@@ -121,8 +116,12 @@ public class Controller implements ActionListener{
         this.shapes = shapes;
     }
 
-   
+    public JButton getButtonColors() {
+        return buttonColors;
+    }
 
+   
+    
 
 
     void addListenerToMouse(JPanel myPanel) {
@@ -145,9 +144,9 @@ public class Controller implements ActionListener{
                         shape.setPoint_one(points.get(0));
                         shape.setPoint_two(points.get(1));
                         shapes.add(shape);
-
+                        
                         shape.paint(myPanel.getGraphics());
-                        //myPanel.paintSquare(myPanel.getGraphics());
+
                         points = new ArrayList<Point>();
 
                     }
@@ -159,24 +158,32 @@ public class Controller implements ActionListener{
         });
     }
 
-    void addListenerUndo(JPanel myPanel){
+    void addListenerUndo(JPanel myPanel, JFrame myFrame){
         buttonUndo.addMouseListener(new MouseAdapter(){
                 @Override
             public void mousePressed(MouseEvent e){
                 
-                System.out.println(shapes.size());
+                //remove from arraylist
                 shapes.remove(shapes.size()-1);
-                myPanel.repaint();
-                for(Shape s: shapes){
-                    s.paint(myPanel.getGraphics());
-                    System.out.println(s.toString());
-                }
                 
+                //paint my frame 
+                myFrame.repaint();
+               
+
             }
         });
     }
 
-    
+    void addListenerColor(JPanel myPanel, JFrame myFrame){
+        buttonColors.addActionListener(((ActionEvent e) -> {
+             MyPanel colorPanel = new MyPanel(100,100, Color.BLACK);
+               colorPanel.setPreferredSize(new Dimension(100, 100));
+               colorPanel.setAlignmentX(100);
+                       myPanel.add(colorPanel);
+                       //myFrame.repaint();
+
+        }));
+    }
 
     
 }

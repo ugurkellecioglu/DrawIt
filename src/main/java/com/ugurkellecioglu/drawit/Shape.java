@@ -5,6 +5,7 @@
  */
 package com.ugurkellecioglu.drawit;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -18,6 +19,7 @@ public class Shape implements IShape{
     protected Point point_two;
 
     public Shape(Point point_one, Point point_two) {
+        super();
         this.point_one = point_one;
         this.point_two = point_two;
     }
@@ -29,6 +31,7 @@ public class Shape implements IShape{
     public void paint(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
     public Point getPoint_one() {
         return point_one;

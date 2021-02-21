@@ -5,14 +5,12 @@
  */
 package com.ugurkellecioglu.drawit;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.HeadlessException;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 /**
@@ -35,24 +33,29 @@ public class MyFrame extends JFrame implements MouseListener{
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        myPanel = new MyPanel();
+        myPanel = new MyPanel(WIDTH, HEIGHT, Color.WHITE);
+
+        this.setLayout(null);
+        myPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         this.getContentPane().add(myPanel);
-        
+
         
         controller.addListenerToMouse(myPanel);
-        controller.addListenerUndo(myPanel);
-        
+        controller.addListenerUndo(myPanel, this);
+        controller.addListenerColor(myPanel, this);
         
         myPanel.add(controller.getButtonSquare());
         myPanel.add(controller.getButtonCircle());
         myPanel.add(controller.getButtonLine());
         myPanel.add(controller.getButtonUndo());
+        myPanel.add(controller.getButtonColors());
     }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        
+    
+    public void paint(Graphics g){
+        super.paint(g);
+        for(Shape s : controller.getShapes()){
+            s.paint(g);
+        }
     }
 
     @Override
