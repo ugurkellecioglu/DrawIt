@@ -5,19 +5,14 @@
  */
 package com.ugurkellecioglu.drawit;
 
-import java.awt.Color;
-import javax.swing.JPanel;
+import java.awt.Graphics;
 
 /**
  *
  * @author ugur
  */
-public class MyPanel extends JPanel{
+public interface IShape {
     
-    public MyPanel(int height, int width, Color c){
-        super();
-        setBounds(0, 0, width, height);
-        setBackground(c);
-
-    }
+    void paint(Graphics g);
+    
 }
